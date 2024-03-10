@@ -29,10 +29,16 @@ defmodule XDR.Util do
   Determines if the module is a valid XDR Type module (as defined by it's exported functions)
   """
   def valid_xdr_type?(atom) when is_atom(atom) do
-    function_exported?(atom, :length, 0) and
-      (function_exported?(atom, :new, 0) or function_exported?(atom, :new, 1)) and
-      function_exported?(atom, :valid?, 1) and function_exported?(atom, :encode, 1) and
-      function_exported?(atom, :decode, 1)
+    case Code.ensure_loaded(atom) do
+      {:module, _} ->
+        function_exported?(atom, :length, 0) and
+          (function_exported?(atom, :new, 0) or function_exported?(atom, :new, 1)) and
+          function_exported?(atom, :valid?, 1) and function_exported?(atom, :encode, 1) and
+          function_exported?(atom, :decode, 1)
+
+      {:error, :nofile} ->
+        false
+    end
   end
 
   def valid_xdr_type?(_), do: false
