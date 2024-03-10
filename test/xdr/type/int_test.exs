@@ -37,8 +37,8 @@ defmodule XDR.Type.IntTest do
 
     assert Int.valid?(0.0) == false
     assert Int.valid?(-0.1) == false
-    assert Int.valid?(-(2 ** 31)) == false
-    assert Int.valid?(2 ** 31 - 1) == false
+    assert Int.valid?(-:math.pow(2, 31)) == false
+    assert Int.valid?(:math.pow(2, 31) - 1) == false
     assert Int.valid?(@min_int - 1) == false
     assert Int.valid?(@max_int + 1) == false
     assert Int.valid?(true) == false

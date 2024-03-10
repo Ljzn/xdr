@@ -5,7 +5,6 @@ defmodule XDR.Type.Uint do
 
   @behaviour XDR.Type.Base
 
-
   alias XDR.Type.Base
   import XDR.Util.Macros
 

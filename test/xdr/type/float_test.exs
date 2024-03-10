@@ -37,7 +37,7 @@ defmodule XDR.Type.FloatTest do
   test "encode" do
     assert Float.encode(0) == {:ok, <<0, 0, 0, 0>>}
     assert Float.encode(0.0) == {:ok, <<0, 0, 0, 0>>}
-    assert Float.encode(-0.0) == {:ok, <<0, 0, 0, 0>>}
+    assert Float.encode(-0.0) == {:ok, <<128, 0, 0, 0>>}
     assert Float.encode(1) == {:ok, <<63, 128, 0, 0>>}
     assert Float.encode(1.0) == {:ok, <<63, 128, 0, 0>>}
     assert Float.encode(-1.0) == {:ok, <<191, 128, 0, 0>>}

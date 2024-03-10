@@ -33,7 +33,7 @@ defmodule XDR.Type.UintTest do
     assert Uint.valid?(-1) == false
     assert Uint.valid?(0.0) == false
     assert Uint.valid?(-0.1) == false
-    assert Uint.valid?(2 ** 32 - 1) == false
+    assert Uint.valid?(:math.pow(2, 32) - 1) == false
     assert Uint.valid?(@min_uint - 1) == false
     assert Uint.valid?(@max_uint + 1) == false
     assert Uint.valid?(true) == false
