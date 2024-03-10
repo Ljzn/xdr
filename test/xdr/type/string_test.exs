@@ -2,7 +2,7 @@ defmodule XDR.Type.StringTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
-  require Math
+
   alias XDR.Type.String
 
   defmodule XDR.Type.StringTest.Len1 do
@@ -25,7 +25,7 @@ defmodule XDR.Type.StringTest do
     import CompileTimeAssertions
 
     assert_compile_time_raise(RuntimeError, "max length too large", fn ->
-      use XDR.Type.String, max_len: Math.pow(2, 32)
+      use XDR.Type.String, max_len: 2**32
     end)
   end
 

@@ -5,7 +5,7 @@ defmodule XDR.Type.Uint do
 
   @behaviour XDR.Type.Base
 
-  require Math
+
   alias XDR.Type.Base
   import XDR.Util.Macros
 
@@ -16,7 +16,7 @@ defmodule XDR.Type.Uint do
   @type xdr :: Base.xdr()
 
   @min_uint 0
-  @max_uint Math.pow(2, 32) - 1
+  @max_uint 2 ** 32 - 1
   @length 4
 
   defguard is_uint(uint)

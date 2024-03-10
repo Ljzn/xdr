@@ -37,7 +37,7 @@ defmodule XDR.Type.DoubleFloatTest do
   test "encode" do
     assert DoubleFloat.encode(0) == {:ok, <<0, 0, 0, 0, 0, 0, 0, 0>>}
     assert DoubleFloat.encode(0.0) == {:ok, <<0, 0, 0, 0, 0, 0, 0, 0>>}
-    assert DoubleFloat.encode(-0.0) == {:ok, <<0, 0, 0, 0, 0, 0, 0, 0>>}
+    assert DoubleFloat.encode(-0.0) == {:ok, <<128, 0, 0, 0, 0, 0, 0, 0>>}
     assert DoubleFloat.encode(1) == {:ok, <<63, 240, 0, 0, 0, 0, 0, 0>>}
     assert DoubleFloat.encode(1.0) == {:ok, <<63, 240, 0, 0, 0, 0, 0, 0>>}
     assert DoubleFloat.encode(-1.0) == {:ok, <<191, 240, 0, 0, 0, 0, 0, 0>>}

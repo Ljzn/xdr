@@ -2,8 +2,6 @@ defmodule XDR.Type.Struct do
   @moduledoc """
   RFC 4506, Section 4.14 - Structure
   """
-
-  require OK
   alias XDR.Type.Base
 
   defmacro __using__(spec) do
@@ -84,12 +82,10 @@ defmodule XDR.Type.Struct do
   def encode(_struct, {_, _}, {:error, reason}), do: {:error, reason}
 
   def encode(struct, {key, module}, {:ok, curr_xdr}) do
-    OK.with do
-      xdr <-
-        struct
-        |> Map.get(key)
-        |> module.encode
-
+    with {:ok, xdr} <-
+           struct
+           |> Map.get(key)
+           |> module.encode() do
       {:ok, curr_xdr <> xdr}
     end
   end
@@ -97,8 +93,7 @@ defmodule XDR.Type.Struct do
   def decode({_, _}, {:error, reason}), do: {:error, reason}
 
   def decode({key, module}, {:ok, {struct, xdr}}) do
-    OK.with do
-      {val, rest} <- module.decode(xdr)
+    with {:ok, {val, rest}} <- module.decode(xdr) do
       {:ok, {Map.put(struct, key, val), rest}}
     end
   end

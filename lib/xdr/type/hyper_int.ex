@@ -3,7 +3,6 @@ defmodule XDR.Type.HyperInt do
   RFC 4506, Section 4.5 - Hyper Integer
   """
 
-  require Math
   alias XDR.Type.Base
   import XDR.Util.Macros
 
@@ -15,8 +14,8 @@ defmodule XDR.Type.HyperInt do
   @type t :: -9_223_372_036_854_775_808..9_223_372_036_854_775_807
   @type xdr :: <<_::_*64>>
 
-  @min_hyper_int -Math.pow(2, 63)
-  @max_hyper_int Math.pow(2, 63) - 1
+  @min_hyper_int 2 ** 63 * -1
+  @max_hyper_int 2 ** 63 - 1
   @length 8
 
   defguard is_hyper_int(int)

@@ -3,7 +3,6 @@ defmodule XDR.Type.Enum do
   RFC 4506, Section 4.3 - Enumeration
   """
 
-  require OK
   import XDR.Util.Macros
   alias XDR.Type.{Base, Int}
 
@@ -88,9 +87,7 @@ defmodule XDR.Type.Enum do
   def decode(_, enum) when not is_list(enum), do: {:error, :invalid_enum}
 
   def decode(xdr, enum) do
-    OK.with do
-      {val, rest} <- Int.decode(xdr)
-
+    with {:ok, {val, rest}} <- Int.decode(xdr) do
       case Enum.find(enum, &Kernel.===(elem(&1, 1), val)) do
         {k, _} -> {:ok, {k, rest}}
         nil -> {:error, :invalid_enum}

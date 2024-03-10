@@ -2,11 +2,11 @@ defmodule XDR.Type.IntTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
-  require Math
+
   alias XDR.Type.Int
 
-  @min_int -Math.pow(2, 31)
-  @max_int Math.pow(2, 31) - 1
+  @min_int 2 ** 31 * -1
+  @max_int 2 ** 31 - 1
 
   test "length" do
     assert Int.length() === 4
@@ -37,8 +37,8 @@ defmodule XDR.Type.IntTest do
 
     assert Int.valid?(0.0) == false
     assert Int.valid?(-0.1) == false
-    assert Int.valid?(-:math.pow(2, 31)) == false
-    assert Int.valid?(:math.pow(2, 31) - 1) == false
+    assert Int.valid?(-(2 ** 31)) == false
+    assert Int.valid?(2 ** 31 - 1) == false
     assert Int.valid?(@min_int - 1) == false
     assert Int.valid?(@max_int + 1) == false
     assert Int.valid?(true) == false

@@ -2,11 +2,11 @@ defmodule XDR.Type.UintTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
-  require Math
+
   alias XDR.Type.Uint
 
   @min_uint 0
-  @max_uint Math.pow(2, 32) - 1
+  @max_uint 2 ** 32 - 1
 
   test "length" do
     assert Uint.length() === 4
@@ -33,7 +33,7 @@ defmodule XDR.Type.UintTest do
     assert Uint.valid?(-1) == false
     assert Uint.valid?(0.0) == false
     assert Uint.valid?(-0.1) == false
-    assert Uint.valid?(:math.pow(2, 32) - 1) == false
+    assert Uint.valid?(2 ** 32 - 1) == false
     assert Uint.valid?(@min_uint - 1) == false
     assert Uint.valid?(@max_uint + 1) == false
     assert Uint.valid?(true) == false
